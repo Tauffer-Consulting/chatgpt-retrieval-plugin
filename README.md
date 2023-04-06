@@ -10,6 +10,8 @@
     - QDRANT_URL
     - QDRANT_API_KEY
     - QDRANT_COLLECTION
+    - QDRANT_DISTANCE (`Dot`)
+    - EXPORT QDRANT_VECTOR_SIZE (`768`)
     - EMBEDDINGS_SERVICE (`cohere`)
     - COHERE_API_KEY
 3. Update `ai-plugin.json` with names, descriptions and app url
