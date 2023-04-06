@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
-  title: Retrieval Plugin API
-  description: A retrieval API for querying and filtering documents based on natural language queries and metadata
+  title: Scoutbee Plugin API
+  description: A retrieval API for querying and filtering suppliers database data
   version: 1.0.0
   servers:
     - url: https://your-app-url.com
@@ -123,7 +123,7 @@ components:
         top_k:
           title: Top K
           type: integer
-          default: 3
+          default: 10
     QueryRequest:
       title: QueryRequest
       required:

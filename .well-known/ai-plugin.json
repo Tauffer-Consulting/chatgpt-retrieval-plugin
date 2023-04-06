@@ -1,9 +1,9 @@
 {
   "schema_version": "v1",
-  "name_for_model": "retrieval",
-  "name_for_human": "Retrieval Plugin",
-  "description_for_model": "Plugin for searching through the user's documents (such as files, emails, and more) to find answers to questions and retrieve relevant information. Use it whenever a user asks something that might be found in their personal information.",
-  "description_for_human": "Search through your documents.",
+  "name_for_model": "suppliers_retrieval",
+  "name_for_human": "Scoutbee Plugin API",
+  "description_for_model": "Use this for searching through suppliers data and retrieve relevant information. Use it whenever a user asks something related to a supplier, it can be its by types of services or products, geographical location or other business relevant information.",
+  "description_for_human": "Search through suppliers data.",
   "auth": {
     "type": "user_http",
     "authorization_type": "bearer"
@@ -14,6 +14,6 @@
     "has_user_authentication": false
   },
   "logo_url": "https://your-app-url.com/.well-known/logo.png",
-  "contact_email": "hello@contact.com", 
+  "contact_email": "hello@contact.com",
   "legal_info_url": "http://example.com/legal-info"
 }
