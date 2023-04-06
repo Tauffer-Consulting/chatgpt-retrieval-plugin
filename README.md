@@ -10,6 +10,8 @@
     - QDRANT_URL
     - QDRANT_API_KEY
     - QDRANT_COLLECTION
+    - EMBEDDINGS_SERVICE (`cohere`)
+    - COHERE_API_KEY
 3. Update `ai-plugin.json` with names, descriptions and app url
 4. Update `.well-known/openai.yaml` in the `info` section
 5. Update `Makefile` with the correct app name (if using Heroku)

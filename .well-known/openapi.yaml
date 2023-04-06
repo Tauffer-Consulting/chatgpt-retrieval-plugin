@@ -4,7 +4,7 @@ info:
   description: A retrieval API for querying and filtering suppliers database data
   version: 1.0.0
   servers:
-    - url: https://your-app-url.com
+    - url: https://scoutbee-chatbot.herokuapp.com/
 paths:
   /query:
     post:

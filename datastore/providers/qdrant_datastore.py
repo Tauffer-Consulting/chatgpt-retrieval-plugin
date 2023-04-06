@@ -25,6 +25,8 @@ QDRANT_PORT = os.environ.get("QDRANT_PORT", "6333")
 QDRANT_GRPC_PORT = os.environ.get("QDRANT_GRPC_PORT", "6334")
 QDRANT_API_KEY = os.environ.get("QDRANT_API_KEY")
 QDRANT_COLLECTION = os.environ.get("QDRANT_COLLECTION", "document_chunks")
+QDRANT_DISTANCE = os.environ.get("QDRANT_DISTANCE", "Cosine")
+QDRANT_VECTOR_SIZE = os.environ.get("QDRANT_VECTOR_SIZE", "1536")
 
 
 class QdrantDataStore(DataStore):
@@ -56,7 +58,7 @@ class QdrantDataStore(DataStore):
         self.collection_name = collection_name or QDRANT_COLLECTION
 
         # Set up the collection so the points might be inserted or queried
-        self._set_up_collection(vector_size, distance, recreate_collection)
+        self._set_up_collection(int(QDRANT_VECTOR_SIZE), QDRANT_DISTANCE, recreate_collection)
 
     async def _upsert(self, chunks: Dict[str, List[DocumentChunk]]) -> List[str]:
         """

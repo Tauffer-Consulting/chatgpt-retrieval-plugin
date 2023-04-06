@@ -1,8 +1,13 @@
 from typing import List
 import openai
-
+import os
+import cohere
 
 from tenacity import retry, wait_random_exponential, stop_after_attempt
+
+
+EMBEDDINGS_SERVICE = os.environ.get("EMBEDDINGS_SERVICE", "openai")
+COHERE_API_KEY = os.environ.get("COHERE_API_KEY", None)
 
 
 @retry(wait=wait_random_exponential(min=1, max=20), stop=stop_after_attempt(3))
@@ -19,14 +24,22 @@ def get_embeddings(texts: List[str]) -> List[List[float]]:
     Raises:
         Exception: If the OpenAI API call fails.
     """
-    # Call the OpenAI API to get the embeddings
-    response = openai.Embedding.create(input=texts, model="text-embedding-ada-002")
-
-    # Extract the embedding data from the response
-    data = response["data"]  # type: ignore
-
-    # Return the embeddings as a list of lists of floats
-    return [result["embedding"] for result in data]
+    if EMBEDDINGS_SERVICE == "openai":
+        # Call the OpenAI API to get the embeddings
+        response = openai.Embedding.create(input=texts, model="text-embedding-ada-002")
+        # Extract the embedding data from the response
+        data = response["data"]  # type: ignore
+        # Return the embeddings as a list of lists of floats
+        return [result["embedding"] for result in data]
+    elif EMBEDDINGS_SERVICE == "cohere":
+        if COHERE_API_KEY is None:
+            raise ValueError(
+                "COHERE_API_KEY environment variable must be set to use the cohere embeddings service."
+            )
+        # Call the Cohere API to get the embeddings
+        co = cohere.Client(COHERE_API_KEY)
+        response = co.embed(texts=texts, model='multilingual-22-12')
+        return response.embeddings
 
 
 @retry(wait=wait_random_exponential(min=1, max=20), stop=stop_after_attempt(3))
