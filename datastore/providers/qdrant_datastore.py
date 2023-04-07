@@ -91,6 +91,7 @@ class QdrantDataStore(DataStore):
             collection_name=self.collection_name,
             requests=search_requests,
         )
+
         return [
             QueryResult(
                 query=query.query,
@@ -234,10 +235,11 @@ class QdrantDataStore(DataStore):
         self, scored_point: rest.ScoredPoint
     ) -> DocumentChunkWithScore:
         payload = scored_point.payload or {}
+
         return DocumentChunkWithScore(
             id=payload.get("id"),
-            text=scored_point.payload.get("text"),  # type: ignore
-            metadata=scored_point.payload.get("metadata"),  # type: ignore
+            text=scored_point.payload.get("response"),  # scored_point.payload.get("text")   # type: ignore
+            metadata={}, # TODO use metadata ?#scored_point.payload.get("metadata"),         # type: ignore
             embedding=scored_point.vector,  # type: ignore
             score=scored_point.score,
         )
